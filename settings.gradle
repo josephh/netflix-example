@@ -1,0 +1,1 @@
+include 'feign-server', 'eureka-server', 'hystrix-server'

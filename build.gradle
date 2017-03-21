@@ -1,0 +1,26 @@
+allprojects {
+  apply plugin: 'java'
+  group = group
+  version = version
+}
+
+subprojects {
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://artifacts.alfresco.com/nexus/content/repositories/public/"
+    }
+  }
+  dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
+    compile group: 'org.springframework.boot', name: 'spring-boot', version: springBootVersion
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-actuator
+    compile group: 'org.springframework.boot', name: 'spring-boot-actuator', version: springBootVersion
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-netflix-core
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-core', version: springCloudVersion
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version: springCloudVersion
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-netflix-eureka-server
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-eureka-server', version: springCloudVersion
+  }
+}
