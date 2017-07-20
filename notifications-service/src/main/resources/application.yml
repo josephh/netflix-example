@@ -1,0 +1,14 @@
+# The 'notification' service to register with Eureka
+server:
+  port: 9000
+
+spring:
+  application:
+    name: notification-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      instance:
+        preferIpAddress: true

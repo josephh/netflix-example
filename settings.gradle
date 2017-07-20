@@ -1,1 +1,2 @@
-include 'feign-server', 'eureka-server', 'hystrix-server'
+rootProject.name='netflicks-example-root'
+include 'eureka-server', 'eureka-client'

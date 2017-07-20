@@ -1,26 +1,34 @@
-allprojects {
-  apply plugin: 'java'
-  group = group
-  version = version
-}
-
-subprojects {
+buildscript {
+  ext {
+    springBootVersion = '1.5.4.RELEASE'
+  }
   repositories {
     mavenCentral()
-    maven {
-      url "https://artifacts.alfresco.com/nexus/content/repositories/public/"
-    }
   }
   dependencies {
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
-    compile group: 'org.springframework.boot', name: 'spring-boot', version: springBootVersion
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-actuator
-    compile group: 'org.springframework.boot', name: 'spring-boot-actuator', version: springBootVersion
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-netflix-core
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-core', version: springCloudVersion
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version: springCloudVersion
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-netflix-eureka-server
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-eureka-server', version: springCloudVersion
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'org.springframework.boot'
+  version = '0.0.1-SNAPSHOT'
+  sourceCompatibility = 1.8
+  repositories {
+    mavenCentral()
+  }
+  ext {
+  	springCloudVersion = 'Dalston.SR1'
+  }
+  dependencies {
+  	compile('org.springframework.cloud:spring-cloud-starter-eureka')
+  	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+  	compile('org.springframework.cloud:spring-cloud-starter')
+  	testCompile('org.springframework.boot:spring-boot-starter-test')
+  }
+  dependencyManagement {
+  	imports {
+  		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
   }
 }

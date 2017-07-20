@@ -1,0 +1,18 @@
+server:
+  port: 8761
+
+management:
+  contextPath: /admin
+
+eureka:
+  instance:
+    hostname: localhost
+    statusPageUrlPath: ${management.context-path}/info  # values like these need to be specified explicitly if defaults are overridden
+    healthCheckUrlPath: ${management.context-path}/health
+    # This is the config for the eureka server, by default a Eureka server also
+    # acts as a Eureka client but we don't want that so disable
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}
